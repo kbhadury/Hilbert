@@ -2,7 +2,7 @@
 
 ![Header] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/hb_header.PNG)
 
-This program draws three-dimensional fractals based on their L-system\* representations and uses OpenGL and the GLUT library to render them.
+This program draws three-dimensional fractals based on their L-system\* representations and uses OpenGL and the GLUT library to render them.  Check out the [Gallery]("https://github.com/kbhadury/Hilbert#gallery") for a few samples!
 
 _Update_: overhauled the original program to use object-oriented design principles.  The user only has to interact with the Driver, which encapsulates most of the inner workings of the Hilbert class.  The program is now able to map user-provided variables to their corresponding rules, so it's no longer restricted to the Hilbert curve.  It also supports push and pop operations, which means it can parse most L-systems (more pen options will be coming soon!).  Also added a debug option.
 
@@ -48,7 +48,7 @@ Below are renderings of the Hilbert curve for various levels of recursion:
 ![Level 3] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/hb3.PNG)
 
 ### Gallery
-Here are some more renderings.  These are all level 3 Hilbert curves.
+#### Here are some more renderings of the Hilbert curve.
 
 Edge view:
 
@@ -61,3 +61,14 @@ Side view:
 Close-up view:
 
 ![Close up] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/hb_inside.PNG)
+
+#### Here's a fractal plant
+_I know it doesn't look very realistic at the moment.  I'm working on it!_
+
+A lush green plant:
+
+![Plant1] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/plant1.PNG)
+
+This rendering highlights the branching points
+
+![Plant2] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/plant2.PNG)
