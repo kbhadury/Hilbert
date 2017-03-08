@@ -1,11 +1,12 @@
 #include "hilbert.h"
 #include <iostream>
+#include <cmath>
 
 //Part of the member function workaround (see the .h file for details)
 Hilbert* Hilbert::curObj = 0;
 
 //Vars for changing the color
-float blue;
+float color;
 bool up;
 
 //Var for scene rotation
@@ -17,7 +18,7 @@ int deg = 0;
 //Constructor, describes L-system
 Hilbert::Hilbert(string start, string vars, string* rules, float ang, float side)
 {
-  consts = "F+-&^\\/|[]"; //Characters that we recognize as constants
+  consts = "F+-&^\\/|[]`~"; //Characters that we recognize as constants
   debug = false;
 
   startStr = start;
@@ -27,12 +28,27 @@ Hilbert::Hilbert(string start, string vars, string* rules, float ang, float side
   sideLen = side;
 
   level = 0;
+  userShape = CUBE;
 }
 
 //Enable drawing a coordinate system and printing the rotation angle
 void Hilbert::enableDebug(bool enable)
 {
   debug = enable;
+}
+
+void Hilbert::setShape(int shape)
+{
+  if(shape < 0 || shape > 2)
+  {
+    userShape = CUBE; //Default to cube
+    cout << "Shape must be Hilbert.CUBE, Hilbert.PYRAMID, or Hilbert.CYLINDER" << endl;
+    cout << "Defaulting to cube" << endl;
+  }
+  else
+  {
+    userShape = shape;
+  }
 }
 
 //Public-facing draw function, calls private gl_main function
@@ -94,6 +110,68 @@ void Hilbert::drawPyra(float height)
   glEnd();
 }
 
+void Hilbert::drawCyl(float len)
+{
+  GLfloat bottomFace[3*15];
+  GLfloat topFace[3*15];
+  
+  //This can probably be made more efficient...
+
+  //Initialize vertices
+  float convert = 3.14159/180;
+  for(int i = 0; i < 15; ++i)
+  {
+    float angle = 24*i*convert;
+    bottomFace[3*i]   = topFace[3*i] = len*cos(angle);
+    bottomFace[3*i+1] = -len/2;
+    topFace[3*i+1]    = len/2;
+    bottomFace[3*i+2] = topFace[3*i+2] = len*sin(angle);
+  }
+
+  //Construct bottom face
+  glBegin(GL_POLYGON);
+    glNormal3f(0, 0, -1);
+    for(int i = 0; i < 15; ++i)
+    {
+      glVertex3f(bottomFace[3*i+2], bottomFace[3*i], bottomFace[3*i+1]);
+    }
+  glEnd();
+
+  //Construct top face
+  glBegin(GL_POLYGON);
+    glNormal3f(0, 0, 1);
+    for(int i = 14; i >= 0; --i)
+    {
+      glVertex3f(topFace[3*i+2], topFace[3*i], topFace[3*i+1]);
+    }
+  glEnd();
+
+  //Construct sides
+  int offset = (15/2) + 1;
+  int numsides = 15;
+  float dtheta = 24*convert;
+  int multiplier;
+  glBegin(GL_QUADS);
+    for(int i = 0; i <= 13; ++i)
+    {
+      multiplier = (i+offset) % numsides;
+      glNormal3f(-1*sin(multiplier*dtheta), -1*cos(multiplier*dtheta), 0);
+      glVertex3f(topFace[3*i+2], topFace[3*i], topFace[3*i+1]);
+      glVertex3f(topFace[3*i+5], topFace[3*i+3], topFace[3*i+4]);
+      glVertex3f(bottomFace[3*i+5], bottomFace[3*i+3], bottomFace[3*i+4]);
+      glVertex3f(bottomFace[3*i+2], bottomFace[3*i], bottomFace[3*i+1]);
+    }
+    
+    //Add the last rectangle
+    multiplier = (14+offset) % numsides;
+    glNormal3f(-1*sin(multiplier*dtheta), -1*cos(multiplier*dtheta), 0);
+    glVertex3f(topFace[3*14+2], topFace[3*14], topFace[3*14+1]);
+    glVertex3f(topFace[2], topFace[0], topFace[1]);
+    glVertex3f(bottomFace[2], bottomFace[0], bottomFace[1]);
+    glVertex3f(topFace[3*14+2], topFace[3*14], topFace[3*14+1]);
+  glEnd();
+}
+
 //Draw a cube of the given side length using GLUT's built-in function
 void Hilbert::drawCube(float height)
 {
@@ -125,19 +203,19 @@ void Hilbert::drawCoord(float len)
 //Fun method for changing the drawing color
 void Hilbert::changeColor()
 {
-  if(blue > 0.9)
+  if(color > 0.9)
   {
     up = false;
   }
-  else if(blue < 0.5)
+  else if(color < 0.5)
   {
     up = true;
   }
 
-  if(up) blue += 0.05;
-  else blue -= 0.05;
+  if(up) color += 0.05;
+  else color -= 0.05;
 
-  glColor3f(0, blue, blue);
+  glColor3f(0, color, 0);
 }
 
 
@@ -187,7 +265,13 @@ void Hilbert::parseStr(string str, int level)
           glRotatef(180,0,1,0); break;
         case 'F':
           changeColor();
-          glCallList(forwardCube); 
+          glCallList(shapes[userShape]); 
+          break;
+        case '`':
+          glColor3f(1, 0, 0);
+          break;
+        case '~':
+          glColor3f(0.5, 0.5, 0.5);
           break;
       }
     }
@@ -221,20 +305,28 @@ void Hilbert::init()
   glEnable(GL_COLOR_MATERIAL);
 
   //Create display lists to (hopefully) speed up processing
-  forwardCube = glGenLists(1);
-  glNewList(forwardCube, GL_COMPILE);
+  shapes[CUBE] = glGenLists(1);
+  glNewList(shapes[CUBE], GL_COMPILE);
     glTranslatef(0, 0, sideLen);
-    glutSolidCube(sideLen);
+    drawCube(sideLen);
     glTranslatef(0, 0, sideLen);
-    glutSolidCube(sideLen);
+    drawCube(sideLen);
   glEndList();
 
-  forwardPyra = glGenLists(1);
-  glNewList(forwardPyra, GL_COMPILE);
+  shapes[PYRAMID] = glGenLists(1);
+  glNewList(shapes[PYRAMID], GL_COMPILE);
     glTranslatef(0, 0, sideLen);
     drawPyra(sideLen);
     glTranslatef(0, 0, sideLen);
     drawPyra(sideLen);
+  glEndList();
+
+  shapes[CYLINDER] = glGenLists(1);
+  glNewList(shapes[CYLINDER], GL_COMPILE);
+    glTranslatef(0, 0, sideLen);
+    drawCyl(sideLen);
+    glTranslatef(0, 0, sideLen);
+    drawCyl(sideLen);
   glEndList();
 }
 
@@ -246,19 +338,28 @@ void Hilbert::display()
   
   glPushMatrix();
 
-  gluLookAt(20, 20, -20, 0, 0, 0, -1, 2, 1); //Corner perspective
+  gluLookAt(20, 30, -20, 0, 10, 0, -1, 2, 1); //Corner perspective
 
   if(debug)
   {
-    drawCoord(sideLen*4);
+    drawCoord(sideLen*10);
     cout << "Rotated by " << deg << " degrees" << endl;
   }
+
+  glColor3f(0.6, 0.8, 1);
+  float convert = 3.14159/180;
+  glBegin(GL_POLYGON);
+    for(int i = 0; i < 360; i += 15)
+    {
+      glVertex3f(-10*cos(i*convert), 0, 10*sin(i*convert));
+    }
+  glEnd();
   
   glRotatef(deg, 0, 1, 0); //Rotate scene
 
   //Set up color variables
-  blue = 0.9;
-  up = false;
+  color = 0.4;
+  up = true;
   
   glRotatef(-90, 1, 0, 0); //Set pen to point upwards
   parseStr(startStr, level);
