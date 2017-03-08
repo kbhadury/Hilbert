@@ -6,6 +6,8 @@ This program draws three-dimensional fractals based on their L-system\* represen
 
 _Update_: overhauled the original program to use object-oriented design principles.  The user only has to interact with the Driver, which encapsulates most of the inner workings of the Hilbert class.  The program is now able to map user-provided variables to their corresponding rules, so it's no longer restricted to the Hilbert curve.  It also supports push and pop operations, which means it can parse most L-systems (more pen options will be coming soon!).  Also added a debug option.
 
+_Update #2_: added cylinders!  Pyramids were previously an option but there was no way to select them without going into the hilbet.cpp file.  Now you can choose whichever shape you want to use from the driver.
+
 _Future plans_: add more pen options (i.e. change size, specify color), give the user more customization options, work on plant models.  Stochastic L-systems are definitely a possibility.
 
 ### About this project
@@ -75,3 +77,7 @@ This rendering highlights the branching points:
 I added an option to draw with pyramids instead of cubes:
 
 ![PyraPlant] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/pyraplant.PNG)
+
+Broccoli is supposed to be good for you
+
+![BroccoliPlant] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/broccoli.PNG)
