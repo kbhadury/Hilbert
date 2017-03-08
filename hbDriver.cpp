@@ -20,8 +20,8 @@ int main(int argc, char** argv)
     "C/////F",
     "F"
   };
-  string plantStart = "A";
-  float plantAngle = 22.5;
+  string plant1Start = "A";
+  float plant1Angle = 22.5;
 
   //A different type of fractal plant
   string plant2Vars = "F";
@@ -33,9 +33,10 @@ int main(int argc, char** argv)
 
   float sideLen = 1;
 
-  Hilbert h(plant2Start, plant2Vars, plant2Rules, plant2Angle, sideLen);
-  h.enableDebug(true);
-  h.draw(argc, argv, 3); //Must be called last!
+  Hilbert h(plant1Start, plant1Vars, plant1Rules, plant1Angle, sideLen);
+  h.enableDebug(false);
+  h.setShape(h.CYLINDER);
+  h.draw(argc, argv, 5); //Must be called last!
 
   return 0;
 }
