@@ -17,12 +17,13 @@ class Hilbert
     string* rulesArr;
 
     //Display lists
-    GLuint forwardCube;
-    GLuint forwardPyra;
+    GLuint shapes[3]; //0=cube, 1=pyra, 2=cyl
+    int userShape;
 
     //Color and drawing
     void drawPyra(float height);
     void drawCube(float height);
+    void drawCyl(float height);
     void drawCoord(float len);
     void changeColor();
 
@@ -53,9 +54,15 @@ class Hilbert
     {
       curObj->keyboard(key, x, y);
     }
-    
+
   public:
+    //Constants to choose the drawing shape
+    static const int CUBE = 0;
+    static const int PYRAMID = 1;
+    static const int CYLINDER = 2;
+
     Hilbert(string start, string vars, string* rules, float ang, float side);
     void enableDebug(bool enable);
+    void setShape(int shape);
     void draw(int argc, char** argv, int lvl);
 };
