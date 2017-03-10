@@ -11,7 +11,9 @@ _Update #2_: added cylinders!  Pyramids were previously an option but there was 
 _Future plans_: add more pen options (i.e. change size, specify color), give the user more customization options, work on plant models.  Stochastic L-systems are definitely a possibility.
 
 ### About this project
-This program was originally designed to draw a three-dimensional Hilbert curve.  The [Hilbert curve](https://en.wikipedia.org/wiki/Hilbert_curve) is a fractal space-filling curve, usually rendered in two dimensions.  It never intersects with itself, but it is mathematically able to reach every point within a square!  Given how compact the curve is, it is able to preserve locality while mapping from 1D to 2D space and finds multiple applications in computer science.  With the latest update, the program can theoretically parse any L-system which uses the constants listed below.  3D plants are especially fun to draw using L-systems.
+This program was originally designed to draw a three-dimensional Hilbert curve.  The [Hilbert curve](https://en.wikipedia.org/wiki/Hilbert_curve) is a fractal space-filling curve, usually rendered in two dimensions.  It never intersects with itself, but it is mathematically able to reach every point within a square!  Given how compact the curve is, it is able to preserve locality while mapping from 1D to 2D space and finds multiple applications in computer science.  
+
+With the latest update, the program can theoretically parse any L-system which uses the constants listed below.  3D plants are especially fun to draw using L-systems.
 
 The inspiration for this project came from an [excellent paper I found online](http://algorithmicbotany.org/papers/abop/abop-ch1.pdf).  If you have any interest in fractals and/or modeling with computer graphics, give it a read!  You'll soon see that, despite their simplicity, L-systems are surprisingly powerful and expressive.
 
