@@ -2,7 +2,9 @@
 
 ### For some reason the inline images aren't being displayed  :(  I'll look into it this weekend!
 
-![Header] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/hb_header.PNG)
+![Header][header]
+
+[header]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/hb_header.PNG
 
 This program draws three-dimensional fractals based on their L-system\* representations and uses OpenGL and the GLUT library to render them.  Check out the [Gallery](https://github.com/kbhadury/Hilbert#gallery) for a few samples!
 
@@ -45,43 +47,63 @@ In this case, we would start with the string "A".  We then specify a recursion l
 Below are renderings of the Hilbert curve for various levels of recursion:
 
 #### Level 1
-![Level 1] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/hb1.PNG)
+![Level 1][lvl1]
+
+[lvl1]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/hb1.PNG
 
 #### Level 2
-![Level 2] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/hb2.PNG)
+![Level 2][lvl2]
+
+[lvl2]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/hb2.PNG
 
 #### Level 3
-![Level 3] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/hb3.PNG)
+![Level 3][lvl3]
+
+[lvl3]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/hb3.PNG
 
 ### Gallery
 #### Here are some more renderings of the Hilbert curve:
 
 Edge view:
 
-![Edge] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/hb_edge.PNG)
+![Edge][edge]
+
+[edge]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/hb_edge.PNG
 
 Side view:
 
-![Side] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/hb_side.PNG)
+![Side][side]
+
+[side]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/hb_side.PNG
 
 Close-up view:
 
-![Close up] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/hb_inside.PNG)
+![Close up][inside]
+
+[inside]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/hb_inside.PNG
 
 #### This a fractal plant (you can find the L-system rules in the hbDriver.cpp file)
 
 A lush green plant (_I know it doesn't look very realistic at the moment.  I'm working on it!_):
 
-![Plant1] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/plant1.PNG)
+![Plant1][plant1]
+
+[plant1]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/plant1.PNG
 
 This rendering highlights the branching points:
 
-![Plant2] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/plant2.PNG)
+![Plant2][plant2]
+
+[plant2]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/plant2.PNG
 
 I added an option to draw with pyramids instead of cubes:
 
-![PyraPlant] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/pyraplant.PNG)
+![PyraPlant][pyra]
+
+[pyra]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/pyraplant.PNG
 
 Broccoli is supposed to be good for you
 
-![BroccoliPlant] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/broccoli.PNG)
+![BroccoliPlant][broccoli]
+
+[broccoli]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/broccoli.PNG
