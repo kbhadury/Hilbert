@@ -1,5 +1,7 @@
 # Hilbert
 
+### For some reason the inline images aren't being displayed  :(  I'll look into it this weekend!
+
 ![Header] (https://github.com/kbhadury/Hilbert/blob/master/Screenshots/hb_header.PNG)
 
 This program draws three-dimensional fractals based on their L-system\* representations and uses OpenGL and the GLUT library to render them.  Check out the [Gallery](https://github.com/kbhadury/Hilbert#gallery) for a few samples!
