@@ -1,7 +1,5 @@
 # Hilbert
 
-### For some reason the inline images aren't being displayed  :(  I'll look into it this weekend!
-
 ![Header][header]
 
 [header]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/hb_header.PNG
