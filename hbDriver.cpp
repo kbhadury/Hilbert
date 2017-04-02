@@ -31,9 +31,28 @@ int main(int argc, char** argv)
   string plant2Start = "F";
   float plant2Angle = 25.7;
 
+  //A third fractal plant
+  string plant3Vars = "XF";
+  string plant3Rules[] = {
+    "F[&X]////[&X]////[&X]FX",
+    "FF"
+  };
+  string plant3Start = "X";
+  float plant3Angle = 30;
+
+  //Same as Plant1 but with leaves
+  string plant4Vars = "AFS";
+  string plant4Rules[] = {
+    "[&F[--$]A]/////[&F[-$]A]///////[&F[---$]A]",
+    "S/////F",
+    "F[--$]",
+  };
+  string plant4Start = "A";
+  float plant4Angle = 22.5;
+
   float sideLen = 1;
 
-  Hilbert h(plant1Start, plant1Vars, plant1Rules, plant1Angle, sideLen);
+  Hilbert h(plant4Start, plant4Vars, plant4Rules, plant4Angle, sideLen);
   h.enableDebug(false);
   h.setShape(h.CYLINDER);
   h.draw(argc, argv, 5); //Must be called last!
