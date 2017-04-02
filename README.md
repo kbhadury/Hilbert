@@ -6,11 +6,13 @@
 
 This program draws three-dimensional fractals based on their L-system\* representations and uses OpenGL and the GLUT library to render them.  Check out the [Gallery](https://github.com/kbhadury/Hilbert#gallery) for a few samples!
 
-_Update_: overhauled the original program to use object-oriented design principles.  The user only has to interact with the Driver, which encapsulates most of the inner workings of the Hilbert class.  The program is now able to map user-provided variables to their corresponding rules, so it's no longer restricted to the Hilbert curve.  It also supports push and pop operations, which means it can parse most L-systems (more pen options will be coming soon!).  Also added a debug option.
+_Update #1_: overhauled the original program to use object-oriented design principles.  The user only has to interact with the Driver, which encapsulates most of the inner workings of the Hilbert class.  The program is now able to map user-provided variables to their corresponding rules, so it's no longer restricted to the Hilbert curve.  It also supports push and pop operations, which means it can parse most L-systems (more pen options will be coming soon!).  Also added a debug option.
 
 _Update #2_: added cylinders!  Pyramids were previously an option but there was no way to select them without going into the hilbet.cpp file.  Now you can choose whichever shape you want to use from the driver.
 
-_Future plans_: add more pen options (i.e. change size, specify color), give the user more customization options, work on plant models.  Stochastic L-systems are definitely a possibility.
+_Update #3_: made cylinders thinner to better resemble branches.  Also added leaves!  Now you can decorate your fractal plants with beautiful foliage.  Just use the "$" constant to draw a leaf (tip: if you want to orient your leaves with rotation commands, make sure you enclose them between push/pop commands so that the plant structure isn't affected by these rotations).
+
+_Future plans_: add more pen options (i.e. change size, specify color), give the user more customization options, work on plant models.  Stochastic L-systems are definitely a possibility.  I'll also try to support user-created leaf designs.
 
 ### About this project
 This program was originally designed to draw a three-dimensional Hilbert curve.  The [Hilbert curve](https://en.wikipedia.org/wiki/Hilbert_curve) is a fractal space-filling curve, usually rendered in two dimensions.  It never intersects with itself, but it is mathematically able to reach every point within a square!  Given how compact the curve is, it is able to preserve locality while mapping from 1D to 2D space and finds multiple applications in computer science.  
@@ -22,7 +24,7 @@ The inspiration for this project came from an [excellent paper I found online](h
 \*If you're wondering what an L-system is or want to see other interesting fractals, check out my previous project ["LSystem"](https://github.com/kbhadury/LSystem).
 
 ### How it works
-This program uses 10 constants to control movement in space:
+This program uses 11 constants, 10 of which control movement in space:
 * F : move forward *(this  moves the pen forward 2 units so that we get spaces between the lines)*
 * + : turn left
 * - : turn right
@@ -33,6 +35,9 @@ This program uses 10 constants to control movement in space:
 * | : turn around
 * [ : push the current position and direction data to the stack
 * ] : pop position and direction data from the stack
+
+The $ symbol is a special constant:
+* $ : draw a leaf
 
 The rotation angle is specified in the constructor, along with a set of variables and their rules.  When we encounter a constant in our input string, we perform its action.  If we encounter a variable, we replace it with another string according to its corresponding rule.  For instance, to draw the Hilbert curve we specify the variables A, B, C, and D, and map them to the following rules:
 * A = B-F+CFC+F-D&F^D-F+&&CFC+F+B//
@@ -82,7 +87,7 @@ Close-up view:
 
 #### This a fractal plant (you can find the L-system rules in the hbDriver.cpp file)
 
-A lush green plant (_I know it doesn't look very realistic at the moment.  I'm working on it!_):
+A lush green plant (_it's not very realistic - this was the first iteration_):
 
 ![Plant1][plant1]
 
@@ -94,7 +99,7 @@ This rendering highlights the branching points:
 
 [plant2]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/plant2.PNG
 
-I added an option to draw with pyramids instead of cubes:
+I added an option to draw with pyramids instead of cubes (_even less realistic, but kind of cool!_):
 
 ![PyraPlant][pyra]
 
@@ -105,3 +110,11 @@ Broccoli is supposed to be good for you
 ![BroccoliPlant][broccoli]
 
 [broccoli]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/broccoli.PNG
+
+The latest update adds leaves!  Now we're getting somewhere
+
+![LeafyPlant][leafyplant]
+
+[leafyplant]: https://raw.githubusercontent.com/kbhadury/Hilbert/master/Screenshots/leafyplant.PNG
+
+
