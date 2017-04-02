@@ -17,13 +17,15 @@ class Hilbert
     string* rulesArr;
 
     //Display lists
-    GLuint shapes[3]; //0=cube, 1=pyra, 2=cyl
+    GLuint shapes[4]; //0=cube, 1=pyra, 2=cyl, 3=leaf (private)
+    static const int LEAF = 3;
     int userShape;
 
     //Color and drawing
     void drawPyra(float height);
     void drawCube(float height);
     void drawCyl(float height);
+    void drawLeaf(float height);
     void drawCoord(float len);
     void changeColor();
 
